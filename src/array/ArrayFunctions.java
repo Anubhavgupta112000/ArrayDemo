@@ -45,11 +45,20 @@ public class ArrayFunctions {
      * @return {@code true} if the value was deleted; {@code false} if the value was not present.
      */
     public boolean deleteValue(int[] array, int value) {
-        if (searchValue(array, value) != -1) {
-
-
+        boolean response = false;
+        int index = searchValue(array, value);
+        if (index != -1) {
+            shiftElements(array, index);
+            response = true;
         }
-        return false;
+        return response;
+    }
+
+    public void shiftElements(int[] array, int index) {
+        for (int i = index; i <= array.length - 1; i++) {
+            array[i - 1] = array[i];
+        }
+        insertValue(array, 0);
     }
 
     /**
@@ -57,7 +66,9 @@ public class ArrayFunctions {
      * lets the user to delete a value based on an index of the array.
      */
     public boolean deleteValue(int index, int[] array) {
-        return false;
+        boolean response = false;
+        shiftElements(array, index);
+        return response;
     }
 
     /**
